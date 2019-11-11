@@ -4,6 +4,8 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
+import { Button } from 'reactstrap';
+
 
 
 const App = () => {
@@ -16,6 +18,11 @@ const App = () => {
                 <Row>
                     <Col lg={{size: 5, offset: 0}}>
                         <RandomChar/>
+                        <Button 
+                            outline 
+                            color="secondary" 
+                            style={{width:100+"%", marginTop: -50+"px"}}
+                            >Hide/Show</Button>
                     </Col>
                 </Row>
                 <Row>

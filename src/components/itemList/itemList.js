@@ -1,21 +1,42 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-
+import gotService from '../../services/gotService'
 
 export default class ItemList extends Component {
+    constructor(){
+        super();
+        this.updateChar();
+    }
+
+    gotService = new gotService();
+    state = {
+        char: {}
+    }
+
+    onCharLoaded = (char) => {
+        this.setState({char})
+    }
+
+    updateChar() {
+        this.gotService.getAllCharacters()
+            .then(this.onCharLoaded);
+            //.catch(this.onError);
+    }
+
 
     render() {
+
         return (
             <ListGroup>
                 <ListGroupItem>
-                    John Snow
+                name
                 </ListGroupItem>
                 <ListGroupItem>
-                    Brandon Stark
+                    name
                 </ListGroupItem>
                 <ListGroupItem>
-                    Geremy
+                    name
                 </ListGroupItem>
             </ListGroup>
         );
