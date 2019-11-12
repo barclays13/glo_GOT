@@ -2,42 +2,49 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import gotService from '../../services/gotService'
-
+import Spinner from '../spinner/';
 export default class ItemList extends Component {
-    constructor(){
-        super();
-        this.updateChar();
-    }
 
     gotService = new gotService();
     state = {
-        char: {}
+        charList: null
     }
 
-    onCharLoaded = (char) => {
-        this.setState({char})
-    }
-
-    updateChar() {
+    componentDidMount() {
         this.gotService.getAllCharacters()
-            .then(this.onCharLoaded);
-            //.catch(this.onError);
+            .then( (charList) => {
+                this.setState({
+                    charList
+                })
+            });
+    }
+
+    renderItems(arr) {
+        return arr.map((item, i) => {
+            return (
+                <ListGroupItem
+                    key={i}
+                    onClick={() => this.props.onCharSelected(41+ i)}
+                    >
+                    {item.name}
+                </ListGroupItem>
+            )
+        })
     }
 
 
     render() {
+        const {charList} = this.state;
+
+        if (!charList) {
+            return <Spinner/>
+        }
+
+        const items = this.renderItems(charList);
 
         return (
             <ListGroup>
-                <ListGroupItem>
-                name
-                </ListGroupItem>
-                <ListGroupItem>
-                    name
-                </ListGroupItem>
-                <ListGroupItem>
-                    name
-                </ListGroupItem>
+                {items}
             </ListGroup>
         );
     }

@@ -4,7 +4,6 @@ import {ListGroup, ListGroupItem } from 'reactstrap';
 import gotService from '../../services/gotService'
 import Spinner from '../spinner/';
 import ErrorMessage from '../errorMessage';
-import { Button } from 'reactstrap';
 
 const RandomBlock = styled.div`
     background-color: #fff;
@@ -20,22 +19,27 @@ const TermSpan = styled.span`
     font-weight: bold;
 `
 export default class RandomChar extends Component {
-    constructor(){
-        super();
-        this.updateChar();
-    }
 
     gotService = new gotService();
     state = {
         char: {},
-        loading: true
+        loading: true, 
+        error: false
+    }
+
+    componentDidMount() {
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
     }
 
     onCharLoaded = (char) => {
         this.setState({
             char,
-            loading: false,
-            error: false
+            loading: false
         })
     }
 
@@ -46,16 +50,16 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateChar() {
+    updateChar= () => {
+        console.log('update');
         const id = Math.floor(Math.random()*140 + 25);
         this.gotService.getCharacters(id)
             .then(this.onCharLoaded)
             .catch(this.onError);
     }
 
-
-
     render() {
+        console.log("render");
         const {char, loading, error} = this.state;
 
         const errorMessage = error ? <ErrorMessage/> : null;
