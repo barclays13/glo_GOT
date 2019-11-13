@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import {ListGroup, ListGroupItem } from 'reactstrap';
-import gotService from '../../services/gotService'
+import gotService from '../../services/gotService';
 import Spinner from '../spinner/';
 import ErrorMessage from '../errorMessage';
 
@@ -9,7 +9,9 @@ const RandomBlock = styled.div`
     background-color: #fff;
     padding: 25px 25px 15px 25px;
     margin-bottom: 40px;
+    cursor: pointer;
         h4{
+            height: 40px;
             margin-bottom: 20px;
             text-align: center;
         }

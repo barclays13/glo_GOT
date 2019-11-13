@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner/';
+
 const CharDetailsBlock = styled.div`
     background-color: #fff;
     padding: 25px 25px 15px 25px;
@@ -12,11 +13,25 @@ const CharDetailsBlock = styled.div`
         text-align: center;
     }
 `
+
 const SelectError = styled.div`
     color: #fff;
     text-align: center;
     font-size: 26px;
 `
+
+const Field = ({char, field, label}) => {
+    return (
+        <>
+            <ListGroupItem  className="d-flex justify-content-between">
+                <span className="term">{label}</span>
+                <span>{char[field]}</span>
+            </ListGroupItem>
+        </>
+    )
+}
+
+export {Field};
 
 export default class CharDetails extends Component {
 
@@ -52,6 +67,7 @@ export default class CharDetails extends Component {
 
         const {char} = this.state;
 
+
         if (!char) {
             return <Spinner/>;
             //<span className='select-error' style={{color: "white"}}> Please select a characters </span>
@@ -62,32 +78,22 @@ export default class CharDetails extends Component {
                 char[key] = "No information"
             }
         }
-
-        const {char: {name, gender, born, died, culture}} = this.state;
+        
+        const {name} = char;
 
         return (
             <CharDetailsBlock className="rounded">
                 <h4>{name}</h4>
                 <ListGroup flush>
-                    <ListGroupItem  className="d-flex justify-content-between">
-                        <span className="term">Gender</span>
-                        <span>{gender}</span>
-                    </ListGroupItem>
-                    <ListGroupItem  className="d-flex justify-content-between">
-                        <span className="term">Born</span>
-                        <span>{born}</span>
-                    </ListGroupItem>
-                    <ListGroupItem  className="d-flex justify-content-between">
-                        <span className="term">Died</span>
-                        <span>{died}</span>
-                    </ListGroupItem>
-                    <ListGroupItem  className="d-flex justify-content-between">
-                        <span className="term">Culture</span>
-                        <span>{culture}</span>
-                    </ListGroupItem>
+                    {
+                        React.Children.map(this.props.children, (child) => {
+                            return React.cloneElement(child, {char})
+                        })
+                    }
+                    
                 </ListGroup>
             </CharDetailsBlock>
-        );
+        )
     }
 }
 
