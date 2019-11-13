@@ -1,5 +1,3 @@
-import { constants } from "crypto";
-
 export default class gotService {
     constructor() {
         this._apiBase = 'https://www.anapioficeandfire.com/api';
@@ -43,7 +41,8 @@ export default class gotService {
             gender: char.gender,
             born: char.born,
             died: char.died,
-            culture: char.culture
+            culture: char.culture,
+            url: char.url
         }
     }
 

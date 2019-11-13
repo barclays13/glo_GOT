@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
-import {Col, Row, Container} from 'reactstrap';
+import {Col, Row} from 'reactstrap';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
 import ErrorMessage from '../errorMessage';

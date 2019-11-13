@@ -7,10 +7,6 @@ import CharacterPage from '../characterPage';
 
 export default class App extends Component {
 
-    constructor(){
-        super();
-    }
-
     state = {
         view: true
     }

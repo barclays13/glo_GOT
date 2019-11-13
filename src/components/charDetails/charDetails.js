@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import gotService from '../../services/gotService';
-
+import Spinner from '../spinner/';
 const CharDetailsBlock = styled.div`
     background-color: #fff;
     padding: 25px 25px 15px 25px;
@@ -30,7 +30,7 @@ export default class CharDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.charId != prevProps.charId) {
+        if (this.props.charId !== prevProps.charId) {
             this.updateChar();
         }
     }
@@ -38,7 +38,7 @@ export default class CharDetails extends Component {
     updateChar() {
         const {charId} = this.props;
         if (!charId) {
-            return;
+            return ; 
         }
 
         this.gotService.getCharacters(charId)
@@ -50,11 +50,20 @@ export default class CharDetails extends Component {
 
     render() {
 
-        if (!this.state.char) {
-            return <span className='select-error' style={{color: "white"}}> Please select a characters </span>
+        const {char} = this.state;
+
+        if (!char) {
+            return <Spinner/>;
+            //<span className='select-error' style={{color: "white"}}> Please select a characters </span>
         }
 
-        const {name, gender, born, died, culture} = this.state.char;
+        for (let  key in char) {
+            if (char[key] ==="") {
+                char[key] = "No information"
+            }
+        }
+
+        const {char: {name, gender, born, died, culture}} = this.state;
 
         return (
             <CharDetailsBlock className="rounded">
