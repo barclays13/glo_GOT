@@ -3,8 +3,8 @@ import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import {Button} from 'reactstrap';
-import ErrorMessage from '../errorMessage'
 import CharacterPage from '../characterPage';
+
 export default class App extends Component {
 
     constructor(){
@@ -12,32 +12,24 @@ export default class App extends Component {
     }
 
     state = {
-        view: true,
-        error: false
-    };
-
-    componentDidCatch(){
-        console.log('error');
-        this.setState({
-            error: true
-        })
-    };
+        view: true
+    }
 
     viewRandomChar (res) {
         this.setState({
             view: !res
         })
-    };
+    }
 
-
+    componentDidCatch(){
+        this.setState({
+            error: true
+        })
+    }
 
     render() {
         const {view} = this.state;
         const viewRandomBlock = view ? <RandomChar/> : null;
-
-        if (this.state.error) {
-            return <ErrorMessage/>
-        }
 
         return (
             <> 

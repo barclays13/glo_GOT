@@ -25,8 +25,6 @@ export default class CharDetails extends Component {
         char: null
     }
 
-
-
     componentDidMount() {
         this.updateChar();
     }

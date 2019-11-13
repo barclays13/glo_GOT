@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import gotService from '../../services/gotService';
 import {Col, Row, Container} from 'reactstrap';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
-import './characterPage';
 import ErrorMessage from '../errorMessage';
-
+import './characterPage';
 export default class CharacterPage extends Component{
 
     state = {
@@ -22,7 +20,7 @@ export default class CharacterPage extends Component{
 
     onCharSelected = (id) => {
         this.setState({
-            selectChar: id
+            selectedChar: id
         })
     }
 
