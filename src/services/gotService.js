@@ -62,7 +62,7 @@ export default class gotService {
         return {
             name: book.name,
             numberOfPages: book.numberOfPages,
-            publiser: book.publiser,
+            publisher: book.publisher,
             released: book.released
         }
     }

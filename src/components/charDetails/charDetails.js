@@ -13,11 +13,11 @@ const CharDetailsBlock = styled.div`
     }
 `
 
-const SelectError = styled.div`
-    color: #fff;
-    text-align: center;
-    font-size: 26px;
-`
+// const SelectError = styled.div`
+//     color: #fff;
+//     text-align: center;
+//     font-size: 26px;
+// `
 
 const Field = ({item, field, label}) => {
     return (
@@ -70,7 +70,7 @@ export default class CharDetails extends Component {
         }
 
         for (let  key in item) {
-            if (item[key] ==="") {
+            if (item[key] ==="" || item[key].length == 0  ) {
                 item[key] = "No information"
             }
         }

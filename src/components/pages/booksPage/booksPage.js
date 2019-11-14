@@ -43,7 +43,7 @@ export default class BooksPage extends Component {
                     itemId={this.state.selectedChar}
                     detaitData={this.gotService.getBooks}>
                     <Field field='numberOfPages' label='Number of pages'/>
-                    <Field field='publiser' label='Publiser'/>
+                    <Field field='publisher' label='Publiser'/>
                     <Field field='released' label='Released'/>
                 </CharDetails>
         );
