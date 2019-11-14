@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import gotService from '../../services/gotService';
 import Spinner from '../spinner/';
 
 const CharDetailsBlock = styled.div`
@@ -20,12 +19,12 @@ const SelectError = styled.div`
     font-size: 26px;
 `
 
-const Field = ({char, field, label}) => {
+const Field = ({item, field, label}) => {
     return (
         <>
             <ListGroupItem  className="d-flex justify-content-between">
                 <span className="term">{label}</span>
-                <span>{char[field]}</span>
+                <span>{item[field]}</span>
             </ListGroupItem>
         </>
     )
@@ -35,53 +34,48 @@ export {Field};
 
 export default class CharDetails extends Component {
 
-    gotService = new gotService();
     state = {
-        char: null
+        item: null
     }
 
     componentDidMount() {
-        this.updateChar();
-    }
+        const {itemId, detaitData} = this.props;
 
-    componentDidUpdate(prevProps) {
-        if (this.props.charId !== prevProps.charId) {
-            this.updateChar();
-        }
-    }
-
-    updateChar() {
-        const {charId} = this.props;
-        if (!charId) {
+        if (!itemId) {
             return ; 
         }
 
-        this.gotService.getCharacters(charId)
-            .then((char) => {
+        detaitData (itemId)
+            .then((item) => {
                 this.setState({
-                    char
+                    item
                 })
             })
         //this.foo.bar = 0;
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.itemId !== prevProps.itemId) {
+            this.componentDidMount();
+        }
+    }
+
     render() {
 
-        const {char} = this.state;
+        const {item} = this.state;
 
-
-        if (!char) {
-            return <Spinner/>;
+        if (!item) {
+            return <Spinner />;
             //<span className='select-error' style={{color: "white"}}> Please select a characters </span>
         }
 
-        for (let  key in char) {
-            if (char[key] ==="") {
-                char[key] = "No information"
+        for (let  key in item) {
+            if (item[key] ==="") {
+                item[key] = "No information"
             }
         }
         
-        const {name} = char;
+        const {name} = item;
 
         return (
             <CharDetailsBlock className="rounded">
@@ -89,7 +83,7 @@ export default class CharDetails extends Component {
                 <ListGroup flush>
                     {
                         React.Children.map(this.props.children, (child) => {
-                            return React.cloneElement(child, {char})
+                            return React.cloneElement(child, {item})
                         })
                     }
                     

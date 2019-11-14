@@ -8,10 +8,9 @@ import RowBlock from '../../rowBlock';
 export default class BooksPage extends Component {
 
     gotService = new gotService();
-
     state = {
-        selectedChar: 130,
-        error: false
+        selectedChar: 3,
+        error: false    
     }
 
     componentDidCatch(){
@@ -36,12 +35,13 @@ export default class BooksPage extends Component {
             <ItemList 
             onItemSelected={this.onItemSelected}
             getData={this.gotService.getAllBooks}
-            getDetailsData={this.gotService.getBooks}
-            renderItem={({name}) => name }/>
+            renderItem={({name, numberOfPages}) => `${name} - (${numberOfPages} pages)` }/>
         );
 
         const charDetails = (
-                <CharDetails charId={this.state.selectedChar}>
+                <CharDetails 
+                    itemId={this.state.selectedChar}
+                    detaitData={this.gotService.getBooks}>
                     <Field field='numberOfPages' label='Number of pages'/>
                     <Field field='publiser' label='Publiser'/>
                     <Field field='released' label='Released'/>

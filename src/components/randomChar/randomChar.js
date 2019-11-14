@@ -52,7 +52,7 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateChar= () => {
+    updateChar = () => {
         const id = Math.floor(Math.random()*140 + 25);
         this.gotService.getCharacters(id)
             .then(this.onCharLoaded)
@@ -64,7 +64,7 @@ export default class RandomChar extends Component {
 
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spinner/> : null;
-        const content = !(loading || error) ? <View char={char}/> : null ;
+        const content = !(loading || error) ? <View char={char} /> : null ;
 
         return (
             <>

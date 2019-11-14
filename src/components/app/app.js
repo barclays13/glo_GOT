@@ -4,9 +4,8 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import {Button} from 'reactstrap';
 import CharacterPage from '../pages/characterPage';
-import ItemList from '../itemList';
-import CharDetails from '../charDetails';
-import BooksPage from '../pages/booksPage'
+import HousesPage from '../pages/housesPage';
+import BooksPage from '../pages/booksPage';
 import gotService from '../../services/gotService';
 export default class App extends Component {
 
@@ -29,12 +28,12 @@ export default class App extends Component {
 
     render() {
         const {view} = this.state;
-        const viewRandomBlock = view ? <RandomChar/> : null;
+        const viewRandomBlock = view ? <RandomChar /> : null;
 
         return (
-            <> 
+            <div className=''> 
                 <Container>
-                    <Header />
+                     <Header/> 
                 </Container>
                 <Container>
                     <Row>
@@ -49,19 +48,9 @@ export default class App extends Component {
                     </Row>
                     <CharacterPage/>
                     <BooksPage/>
-                        <Row>
-                            <Col md='6'>
-                                <ItemList 
-                                    onItemSelected={this.onItemSelected}
-                                    getData={this.gotService.getAllHouses}
-                                    renderItem={(item) => item.name }/>
-                            </Col>
-                            <Col md='6'>
-                                <CharDetails charId={this.state.selectedChar}/>
-                            </Col>
-                        </Row>
+                    <HousesPage/>
                 </Container>
-            </>
+            </div>
         );
     }
 }
