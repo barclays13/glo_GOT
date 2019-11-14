@@ -3,9 +3,10 @@ import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import {Button} from 'reactstrap';
-import CharacterPage from '../characterPage';
+import CharacterPage from '../pages/characterPage';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
+import BooksPage from '../pages/booksPage'
 import gotService from '../../services/gotService';
 export default class App extends Component {
 
@@ -47,17 +48,7 @@ export default class App extends Component {
                         </Col>
                     </Row>
                     <CharacterPage/>
-                        <Row>
-                            <Col md='6'>
-                                <ItemList 
-                                    onItemSelected={this.onItemSelected}
-                                    getData={this.gotService.getAllBooks}
-                                    renderItem={(item) => item.name }/>
-                            </Col>
-                            <Col md='6'>
-                                <CharDetails charId={this.state.selectedChar}/>
-                            </Col>
-                        </Row>
+                    <BooksPage/>
                         <Row>
                             <Col md='6'>
                                 <ItemList 

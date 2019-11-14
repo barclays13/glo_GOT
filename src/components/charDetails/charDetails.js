@@ -58,7 +58,9 @@ export default class CharDetails extends Component {
 
         this.gotService.getCharacters(charId)
             .then((char) => {
-                this.setState({char});
+                this.setState({
+                    char
+                })
             })
         //this.foo.bar = 0;
     }

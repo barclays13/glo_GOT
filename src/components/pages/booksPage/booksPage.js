@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import ItemList from '../itemList';
-import CharDetails, {Field} from '../charDetails';
-import ErrorMessage from '../errorMessage';
-import './characterPage';
-import gotService from '../../services/gotService';
-import RowBlock from '../rowBlock';
+import ItemList from '../../itemList';
+import CharDetails, {Field} from '../../charDetails';
+import ErrorMessage from '../../errorMessage';
+import gotService from '../../../services/gotService';
+import RowBlock from '../../rowBlock';
 
-export default class CharacterPage extends Component{
+export default class BooksPage extends Component {
 
     gotService = new gotService();
+
     state = {
         selectedChar: 130,
         error: false
@@ -35,16 +35,16 @@ export default class CharacterPage extends Component{
         const itemList = (
             <ItemList 
             onItemSelected={this.onItemSelected}
-            getData={this.gotService.getAllCharacters}
-            renderItem={({name, gender}) => `${name} (${gender})`}/>
+            getData={this.gotService.getAllBooks}
+            getDetailsData={this.gotService.getBooks}
+            renderItem={({name}) => name }/>
         );
 
         const charDetails = (
                 <CharDetails charId={this.state.selectedChar}>
-                    <Field field='gender' label='Gender'/>
-                    <Field field='born' label='Born'/>
-                    <Field field='died' label='Died'/>
-                    <Field field='culture' label='Culture'/>
+                    <Field field='numberOfPages' label='Number of pages'/>
+                    <Field field='publiser' label='Publiser'/>
+                    <Field field='released' label='Released'/>
                 </CharDetails>
         );
 
