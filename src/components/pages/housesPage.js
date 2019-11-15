@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import ItemList from '../../itemList';
-import CharDetails, {Field} from '../../charDetails';
-import ErrorMessage from '../../errorMessage';
-import gotService from '../../../services/gotService';
-import RowBlock from '../../rowBlock';
+import ItemList from '../itemList';
+import CharDetails, {Field} from '../charDetails';
+import ErrorMessage from '../errorMessage';
+import gotService from '../../services/gotService';
+import RowBlock from '../rowBlock';
 
-export default class BooksPage extends Component {
+export default class HousesPage extends Component {
 
     gotService = new gotService();
     state = {
-        selectedChar: 3,
+        selectedChar: 30,
         error: false    
     }
 
@@ -34,20 +34,20 @@ export default class BooksPage extends Component {
         const itemList = (
             <ItemList 
             onItemSelected={this.onItemSelected}
-            getData={this.gotService.getAllBooks}
-            renderItem={({name, numberOfPages}) => `${name} - (${numberOfPages} pages)` }/>
+            getData={this.gotService.getAllHouses}
+            renderItem={({name, region}) => `${name} (${region})`}/>
         );
 
         const charDetails = (
                 <CharDetails 
                     itemId={this.state.selectedChar}
-                    detaitData={this.gotService.getBooks}>
-                    <Field field='numberOfPages' label='Number of pages'/>
-                    <Field field='publisher' label='Publiser'/>
-                    <Field field='released' label='Released'/>
+                    detaitData={this.gotService.getHouses}>
+                    <Field field='region' label='Region'/>
+                    <Field field='words' label='Words'/>
+                    <Field field='titles' label='Titles'/>
+                    
                 </CharDetails>
         );
-
         return (
             <RowBlock left={itemList} right={charDetails}/>
         );

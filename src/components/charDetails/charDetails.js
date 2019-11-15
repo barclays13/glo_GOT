@@ -67,10 +67,11 @@ export default class CharDetails extends Component {
         if (!item) {
             return <Spinner />;
             //<span className='select-error' style={{color: "white"}}> Please select a characters </span>
+            
         }
 
         for (let  key in item) {
-            if (item[key] ==="" || item[key].length == 0  ) {
+            if (item[key] ==="" || item[key].length === 0  ) {
                 item[key] = "No information"
             }
         }
