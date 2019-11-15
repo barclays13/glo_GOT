@@ -10,14 +10,14 @@ const CharDetailsBlock = styled.div`
     h4 {
         margin-bottom: 20px;
         text-align: center;
+        :hover{
+            font-size:30px;
+            opacity:0.6;
+            font-weight:800;
+        }
     }
 `
 
-// const SelectError = styled.div`
-//     color: #fff;
-//     text-align: center;
-//     font-size: 26px;
-// `
 
 const Field = ({item, field, label}) => {
     return (
@@ -60,6 +60,8 @@ export default class CharDetails extends Component {
         }
     }
 
+
+
     render() {
 
         const {item} = this.state;
@@ -67,11 +69,11 @@ export default class CharDetails extends Component {
         if (!item) {
             return <Spinner />;
             //<span className='select-error' style={{color: "white"}}> Please select a characters </span>
-            
         }
 
         for (let  key in item) {
-            if (item[key] ==="" || item[key].length === 0  ) {
+
+            if (item[key][0] === "" || item[key].length === 0) {
                 item[key] = "No information"
             }
         }

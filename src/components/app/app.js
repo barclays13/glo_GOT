@@ -15,8 +15,6 @@ export default class App extends Component {
 
     viewRandomChar (res) {
         this.setState({
-
-
             view: !res
         })
     }
@@ -28,8 +26,9 @@ export default class App extends Component {
     }
 
     render() {
-        const {view} = this.state;
-        const viewRandomBlock = view ? <RandomChar /> : null;
+         const {view} = this.state;
+
+        const viewRandomBlock = view ? <RandomChar/> : null;
 
         return (
             <Router>
