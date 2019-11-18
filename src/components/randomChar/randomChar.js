@@ -24,40 +24,35 @@ const TermSpan = styled.span`
 
 function RandomChar(){
 
-    gotService = new gotService();
-    const [{char, loading, error}, updataList] = useState([{char: {}, loading: true,error: false}]);
-
-
+    const [{char, loading, error}, updataChar] = useState([]);
     useEffect (() => {
-        if (char) {
             updateChar();
-            let timerId = setInterval(updateChar, 2000);
+            const timerId = setInterval(updateChar, 2000);
             return () => {
                 clearInterval(timerId);
             }
-        }
-    })
+        
+    }, []);
 
 
     function onCharLoaded (char) {
-        updataList({
+        updataChar({
             char,
             loading: false
         })
     }
 
     function onError (error) {
-        updataList({
+        updataChar({
             error: true,
             loading: false
         })
     }
 
     function updateChar () {
-
         const id = Math.floor(Math.random()*140 + 25);
-
-        gotService.getCharacters(id)
+         gotService = new gotService.getCharacters(id);
+        gotService()
             .then(onCharLoaded)
             .catch(onError);
     }
@@ -109,7 +104,5 @@ function RandomChar(){
     );
 
 }
-
-
 
 export default RandomChar;
