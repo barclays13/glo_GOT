@@ -1,51 +1,44 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import Spinner from '../spinner/';
-export default class ItemList extends Component {
 
-    state = {
-        itemList: null
-    }
+function  ItemList({getData, onItemSelected, renderItem}) {
 
-    componentDidMount() {
-        const {getData} = this.props;
+    const [itemList, updateList] = useState([]);
 
+    useEffect(() => {
         getData()
-            .then( (itemList) => {
-                this.setState({
-                    itemList
-                })
-            });
-    }
+        .then( (data) => {
+            updateList(data)
+        });
+    }, [])
 
-    rendersItems(arr) {
+    function rendersItems(arr) {
         return arr.map((item) => {
             const id = item.url.match(/\/([^\/]+)\/?$/)[1];
-            const label = this.props.renderItem(item);
+            const label = renderItem(item);
             return (
                 <ListGroupItem
                     style ={{cursor: "pointer"}}
                     key={id}
-                    onClick={() => this.props.onItemSelected(id)}>
+                    onClick={() => onItemSelected(id)}>
                     {label}
                 </ListGroupItem>
             )
         })
     }
 
-    render() {
-        const {itemList} = this.state;
-
-        if (!itemList) {
-            return <Spinner/>
-        }
-
-        const items = this.rendersItems(itemList);
-
-        return (
-            <ListGroup>
-                {items}
-            </ListGroup>
-        );
+    if (!itemList) {
+        return <Spinner/>
     }
+
+    const items = rendersItems(itemList);
+
+    return (
+        <ListGroup>
+            {items}
+        </ListGroup>
+    );
 }
+
+export default ItemList;

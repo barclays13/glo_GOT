@@ -24,6 +24,7 @@ export default class App extends Component {
             error: true
         })
     }
+    
 
     render() {
          const {view} = this.state;
