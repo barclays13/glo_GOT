@@ -51,8 +51,8 @@ function RandomChar(){
 
     function updateChar () {
         const id = Math.floor(Math.random()*140 + 25);
-         gotService = new gotService.getCharacters(id);
-        gotService()
+        gotService = new gotService();
+        gotService.getCharacters(id)
             .then(onCharLoaded)
             .catch(onError);
     }
