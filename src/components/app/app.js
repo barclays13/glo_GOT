@@ -4,8 +4,8 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import {Button} from 'reactstrap';
 import {BooksPage, HousesPage, CharacterPage, BooksItem} from '../pages';
-import gotService from '../../services/gotService';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import gotService from '../../services/gotService';
 export default class App extends Component {
 
     gotService = new gotService();

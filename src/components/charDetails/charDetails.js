@@ -32,7 +32,6 @@ export {Field};
 
 
 function CharDetails ({detaitData, itemId, children}){
-    
     const [item, updateList] = useState([]);
 
     useEffect(() => {
@@ -40,7 +39,7 @@ function CharDetails ({detaitData, itemId, children}){
             .then((item) => {
                 updateList(item)
             })
-    }, [item])
+    },[item])
 
     if (!item) {
         return <Spinner />;
@@ -55,7 +54,6 @@ function CharDetails ({detaitData, itemId, children}){
     }
     
     const {name} = item;
-
     return (
         <CharDetailsBlock className="rounded">
             <h4>{name}</h4>
