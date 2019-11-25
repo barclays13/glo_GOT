@@ -25,7 +25,7 @@ function RandomChar(){
     const [{char = {}, loading = true , error = false}, updataChar] = useState([]);
 
     useEffect (() => {
-            const timerId = setInterval(updateChar, 3000);
+            const timerId = setInterval(updateChar, 5000);
             updateChar();
             return () => {
                 clearInterval(timerId);

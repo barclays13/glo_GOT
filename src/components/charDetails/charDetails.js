@@ -34,12 +34,15 @@ export {Field};
 function CharDetails ({detaitData, itemId, children}){
     const [item, updateList] = useState([]);
 
-    useEffect(() => {
-        detaitData(itemId)
-            .then((item) => {
-                updateList(item)
-            })
-    },[item])
+    const updateItem = async (itemId) => {
+        let item = await detaitData(itemId)
+        return updateList(item)
+    }
+
+    useEffect (() => {
+        updateItem(itemId);
+    },[itemId]);
+
 
     if (!item) {
         return <Spinner />;
@@ -47,13 +50,13 @@ function CharDetails ({detaitData, itemId, children}){
     }
 
     for (let  key in item) {
-
         if (item[key][0] === "" || item[key].length === 0) {
             item[key] = "No information"
         }
     }
     
     const {name} = item;
+
     return (
         <CharDetailsBlock className="rounded">
             <h4>{name}</h4>
